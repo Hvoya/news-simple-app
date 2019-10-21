@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NewsManiPage: React.FC = () => {
+const NewsMainPage: React.FC = () => {
   return (
     <div>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -17,4 +17,4 @@ const NewsManiPage: React.FC = () => {
   );
 };
 
-export default NewsManiPage;
+export default NewsMainPage;

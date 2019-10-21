@@ -1,8 +1,5 @@
 import React from 'react';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import CollectionsIcon from '@material-ui/icons/Collections';
 import SettingsIcon from '@material-ui/icons/Settings';
 import HelpIcon from '@material-ui/icons/Help';
@@ -11,6 +8,7 @@ import MaterialDrawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import {ClassNameMap} from '@material-ui/core/styles/withStyles';
 import Divider from '@material-ui/core/Divider';
+import NavLink from '../NavLink';
 
 interface IDrawerProps {
   classes: ClassNameMap
@@ -24,22 +22,26 @@ const Drawer: React.FC<IDrawerProps> = (props) => {
       <div className={classes.toolbar} />
         <Divider />
         <List>
-          <ListItem button key={'news'}>
-            <ListItemIcon><CollectionsIcon /></ListItemIcon>
-            <ListItemText primary='Главная' />
-          </ListItem>
-          <ListItem button key={'settings'}>
-            <ListItemIcon><SettingsIcon /></ListItemIcon>
-            <ListItemText primary='Настройки' />
-          </ListItem>
-          <ListItem button key={'help'}>
-            <ListItemIcon><HelpIcon /></ListItemIcon>
-            <ListItemText primary='Помощь' />
-          </ListItem>
-          <ListItem button key={'about'}>
-            <ListItemIcon><InfoIcon /></ListItemIcon>
-            <ListItemText primary='О нас' />
-          </ListItem>
+          <NavLink
+            to='/news'
+            primary='Новости'
+            icon={<CollectionsIcon />}
+          />
+          <NavLink
+            to='/settings'
+            primary='Настройки'
+            icon={<SettingsIcon />}
+          />
+          <NavLink
+            to='/help'
+            primary='Помощь'
+            icon={<HelpIcon />}
+          />
+          <NavLink
+            to='/about'
+            primary='О нас'
+            icon={<InfoIcon />}
+          />
         </List>
         <Divider />
     </div>
