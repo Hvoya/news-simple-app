@@ -1,17 +1,17 @@
-import React from 'react';
-import List from '@material-ui/core/List';
-import CollectionsIcon from '@material-ui/icons/Collections';
-import SettingsIcon from '@material-ui/icons/Settings';
-import HelpIcon from '@material-ui/icons/Help';
-import InfoIcon from '@material-ui/icons/Info';
+import Divider from '@material-ui/core/Divider';
 import MaterialDrawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
+import List from '@material-ui/core/List';
 import {ClassNameMap} from '@material-ui/core/styles/withStyles';
-import Divider from '@material-ui/core/Divider';
+import CollectionsIcon from '@material-ui/icons/Collections';
+import HelpIcon from '@material-ui/icons/Help';
+import InfoIcon from '@material-ui/icons/Info';
+import SettingsIcon from '@material-ui/icons/Settings';
+import React from 'react';
 import NavLink from '../NavLink';
 
 interface IDrawerProps {
-  classes: ClassNameMap
+  classes: ClassNameMap;
 }
 
 const Drawer: React.FC<IDrawerProps> = (props) => {
@@ -23,23 +23,23 @@ const Drawer: React.FC<IDrawerProps> = (props) => {
         <Divider />
         <List>
           <NavLink
-            to='/news'
-            primary='Новости'
+            to="/news"
+            primary="Новости"
             icon={<CollectionsIcon />}
           />
           <NavLink
-            to='/settings'
-            primary='Настройки'
+            to="/settings"
+            primary="Настройки"
             icon={<SettingsIcon />}
           />
           <NavLink
-            to='/help'
-            primary='Помощь'
+            to="/help"
+            primary="Помощь"
             icon={<HelpIcon />}
           />
           <NavLink
-            to='/about'
-            primary='О нас'
+            to="/about"
+            primary="О нас"
             icon={<InfoIcon />}
           />
         </List>

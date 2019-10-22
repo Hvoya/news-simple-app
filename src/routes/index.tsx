@@ -1,11 +1,11 @@
 import React from 'react';
 import {Redirect, Route, Switch} from 'react-router';
 
+import AboutMainPage from '../modules/about/AboutMainPage';
+import HelpMainPage from '../modules/help/HelpMainPage';
 import NewsMainPage from '../modules/news/NewsMainPage';
 import NewsSinglePage from '../modules/news/NewsSinglePage';
 import SettingsMainPage from '../modules/settings/SettingsMainPage';
-import AboutMainPage from '../modules/about/AboutMainPage';
-import HelpMainPage from '../modules/help/HelpMainPage';
 
 const Routes: React.FC = () => {
   return (

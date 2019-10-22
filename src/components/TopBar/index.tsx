@@ -1,19 +1,21 @@
-import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import Typography from '@material-ui/core/Typography';
-import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import {ClassNameMap} from '@material-ui/core/styles/withStyles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
+import React from 'react';
+import { IHeader } from '../../store/types';
 
 interface ITopBarProps {
-  classes: ClassNameMap,
+  classes: ClassNameMap;
+  header: IHeader;
 }
 
 const TopBar: React.FC<ITopBarProps> = (props) => {
-  const { classes } = props;
+  const { classes, header } = props;
   return (
-      <AppBar className={classes.appBar} position='fixed'>
+      <AppBar className={classes.appBar} position="fixed">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -25,7 +27,7 @@ const TopBar: React.FC<ITopBarProps> = (props) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            heheheheehh h ha he rqwe rqew qe rqw erqw erq erq er qwe
+            {header.title}
           </Typography>
         </Toolbar>
       </AppBar>
