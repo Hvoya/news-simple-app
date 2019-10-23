@@ -21,7 +21,7 @@ function initializeSettings(): ISettings {
   const JSONSettings = localStorage.getItem('settings') || '{}';
   const settings = JSON.parse(JSONSettings);
   return {
-    font_size: settings.font_size || 16,
+    font_size: settings.font_size || 14,
     font_family: settings.font_family || EFontFamily.roboto,
     theme_type: settings.theme || ETheme.light,
     news_per_page: settings.news_per_page || 10,

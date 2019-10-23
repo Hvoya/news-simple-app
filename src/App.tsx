@@ -3,14 +3,15 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import styles from './App.styles';
 import Drawer from './components/Drawer';
 import TopBar from './components/TopBar';
+import layout from './layout.styles';
 import Routes from './routes';
 import { IStore } from './store/types';
 
 const App: React.FC = () => {
-  const useStyles = makeStyles(styles);
+  // Выносим стили в отдельные файл. Нучего им тут делать.
+  const useStyles = makeStyles(layout);
   const classes = useStyles();
   const header = useSelector((store: IStore) => store.header);
 
@@ -21,7 +22,7 @@ const App: React.FC = () => {
       <Drawer classes={classes}/>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Routes/>
+          <Routes/>
       </main>
     </div>
   );

@@ -6,10 +6,13 @@ export const styles = (theme: Theme) =>
       margin: theme.spacing(1),
       minWidth: 200,
     },
+    newsPerPage: {
+      minWidth: 270,
+    },
     bottomSpacing: {
       marginBottom: theme.spacing(3),
     },
-    container: {
-      maxWidth: 700,
+    panelsContainer: {
+      maxWidth: '60em',
     },
   });

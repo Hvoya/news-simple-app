@@ -26,7 +26,8 @@ const TopBar: React.FC<ITopBarProps> = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          {/*Меняем на div. Зачем нам h1?*/}
+          <Typography variant="h5" component="div" noWrap>
             {header.title}
           </Typography>
         </Toolbar>

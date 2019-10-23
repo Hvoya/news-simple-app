@@ -23,3 +23,10 @@ export interface ISettings {
   theme_type: ETheme;
   news_per_page: number;
 }
+
+export interface INews {
+  title: string;
+  description: string;
+  publishedAt: string;
+  urlToImage: string;
+}

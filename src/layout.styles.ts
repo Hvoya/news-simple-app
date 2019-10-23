@@ -2,7 +2,7 @@ import { createStyles, Theme } from '@material-ui/core/styles';
 
 const drawerWidth = 260;
 
-function styles(theme: Theme) {
+function layout(theme: Theme) {
   return createStyles({
     root: {
       display: 'flex',
@@ -32,8 +32,9 @@ function styles(theme: Theme) {
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
+      paddingTop: theme.spacing(5),
     },
   });
 }
 
-export default styles;
+export default layout;
