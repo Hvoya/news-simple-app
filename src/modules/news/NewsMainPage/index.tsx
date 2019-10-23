@@ -1,33 +1,21 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { setHeader } from '../../../store/actions/header';
-import { IHeader } from '../../../store/types';
 
-interface INewsMainPageProps {
-  setHeader: (header: IHeader) => void;
-}
-
-class NewsMainPage extends Component<INewsMainPageProps> {
-  public componentDidMount(): void {
-    const { setHeader: changeHeader } = this.props;
-    changeHeader({
+const NewsMainPage: React.FC = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setHeader({
       title: 'Новости',
-    });
-  }
+    }));
+  }, [dispatch]);
 
-  public render() {
-    return (
-      <div>
+  return (
+    <div >
 
-      </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-export default connect(
-  null,
-  (dispatch) => ({
-    setHeader: (header: IHeader) => dispatch(setHeader(header)),
-  }),
-)(NewsMainPage);
+export default NewsMainPage;

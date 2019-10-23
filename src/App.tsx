@@ -1,20 +1,18 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
 import React from 'react';
 
-import {connect} from 'react-redux';
-import useStyles from './App.styles';
+import { makeStyles } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import styles from './App.styles';
 import Drawer from './components/Drawer';
 import TopBar from './components/TopBar';
 import Routes from './routes';
-import { IHeader, IStore } from './store/types';
+import { IStore } from './store/types';
 
-interface IAppProps {
-  header: IHeader;
-}
-
-const App: React.FC<IAppProps> = (props) => {
+const App: React.FC = () => {
+  const useStyles = makeStyles(styles);
   const classes = useStyles();
-  const { header } = props;
+  const header = useSelector((store: IStore) => store.header);
 
   return (
     <div className={classes.root}>
@@ -29,6 +27,4 @@ const App: React.FC<IAppProps> = (props) => {
   );
 };
 
-export default connect(
-  (store: IStore) => ({header: store.header}),
-)(App);
+export default App;
