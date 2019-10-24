@@ -9,16 +9,12 @@ interface IExpPanelProps {
 }
 
 const ExpPanel: React.FC<IExpPanelProps> = ({ children, header, className }) => {
-  return <ExpansionPanel className={className}>
-    <ExpansionPanelSummary
-      expandIcon={<ExpandMoreIcon />}
-    >
-      {header}
-    </ExpansionPanelSummary>
-    <ExpansionPanelDetails>
-      {children}
-    </ExpansionPanelDetails>
-  </ExpansionPanel>;
+  return (
+    <ExpansionPanel className={className}>
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>{header}</ExpansionPanelSummary>
+      <ExpansionPanelDetails>{children}</ExpansionPanelDetails>
+    </ExpansionPanel>
+  );
 };
 
 export default ExpPanel;

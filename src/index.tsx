@@ -13,12 +13,13 @@ configureAxios();
 
 ReactDOM.render(
   <BrowserRouter>
-      <Provider store={store}>
-        <CustomThemeProvider>
-          <App />
-        </CustomThemeProvider>
-      </Provider>
-  </BrowserRouter>
-  , document.getElementById('root'));
+    <Provider store={store}>
+      <CustomThemeProvider>
+        <App />
+      </CustomThemeProvider>
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById('root'),
+);
 
 serviceWorker.unregister();

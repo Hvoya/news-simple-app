@@ -1,14 +1,14 @@
 import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { IStore } from '../../store/types';
+import { IState } from '../../store/types';
 
 interface ICustomThemeProviderProps {
   children: React.ReactNode;
 }
 
 const CustomThemeProvider: React.FC<ICustomThemeProviderProps> = ({ children }) => {
-  const settings = useSelector((state: IStore) => state.settings);
+  const settings = useSelector((state: IState) => state.settings);
   const { font_size, font_family, theme_type } = settings;
   let theme = createMuiTheme({
     palette: {
@@ -29,9 +29,7 @@ const CustomThemeProvider: React.FC<ICustomThemeProviderProps> = ({ children }) 
     },
   });
   theme = responsiveFontSizes(theme);
-  return <ThemeProvider theme={theme}>
-    {children}
-  </ThemeProvider>;
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 
 export default CustomThemeProvider;
