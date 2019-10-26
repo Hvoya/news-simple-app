@@ -39,7 +39,7 @@ const Drawer: React.FC<IDrawerProps> = props => {
 
   return (
     <nav className={classes.drawer} aria-label="mailbox folders">
-      <Hidden smUp implementation="css">
+      <Hidden lgUp implementation="css">
         <MaterialDrawer
           onClose={handleMobileDrawerCancel}
           open={isMobileDrawerOpen}
@@ -54,7 +54,7 @@ const Drawer: React.FC<IDrawerProps> = props => {
           {drawerContent}
         </MaterialDrawer>
       </Hidden>
-      <Hidden xsDown implementation="css">
+      <Hidden smDown implementation="css">
         <MaterialDrawer
           classes={{
             paper: classes.drawerPaper,

@@ -8,20 +8,20 @@ function layout(theme: Theme) {
       display: 'flex',
     },
     drawer: {
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.up('md')]: {
         width: drawerWidth,
         flexShrink: 0,
       },
     },
     appBar: {
       marginLeft: drawerWidth,
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.up('md')]: {
         width: `calc(100% - ${drawerWidth}px)`,
       },
     },
     menuButton: {
       marginRight: theme.spacing(2),
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.up('md')]: {
         display: 'none',
       },
     },

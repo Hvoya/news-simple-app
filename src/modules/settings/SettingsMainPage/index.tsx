@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ExpPanel from '../../../components/ExpPanel';
+import SourcesSelect from '../../../components/SourcesSelect';
 import { setHeader } from '../../../store/actions/header';
 import { setSettings } from '../../../store/actions/settings';
 import { IState } from '../../../store/types';
@@ -21,7 +22,8 @@ const SettingsMainPage: React.FC = () => {
 
   const useStyles = makeStyles(styles);
   const classes = useStyles();
-  const { font_size, theme_type, font_family, news_per_page, news_lang } = useSelector(
+
+  const { font_size, theme_type, font_family, news_per_page, news_lang, sources } = useSelector(
     (store: IState) => store.settings,
   );
 
@@ -104,6 +106,11 @@ const SettingsMainPage: React.FC = () => {
               {newsLangOptions}
             </Select>
           </FormControl>
+          <SourcesSelect
+            onChange={(value: string[]) => handleChangeSettings('sources', value)}
+            values={sources}
+            lang={news_lang}
+          />
         </ExpPanel>
       </div>
     </div>

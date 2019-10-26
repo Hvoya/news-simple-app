@@ -18,7 +18,7 @@ export enum ETheme {
   light = 'light',
 }
 
-export enum ILang {
+export enum ELang {
   ru = 'ru',
   en = 'en',
   zh = 'zh',
@@ -29,12 +29,19 @@ export interface ISettings {
   font_family: EFontFamily;
   theme_type: ETheme;
   news_per_page: number;
-  news_lang: ILang;
+  news_lang: ELang;
+  sources: string[];
 }
 
 export interface INews {
   title: string;
   description: string;
-  publishedAt: string;
+  publishedAt: Date;
   urlToImage: string;
+  url: string;
+}
+
+export interface ISource {
+  id: string;
+  name: string;
 }

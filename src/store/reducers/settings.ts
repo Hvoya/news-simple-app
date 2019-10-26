@@ -1,6 +1,6 @@
 import actionTypes from '../action_types';
 import { ISetSettingsAction } from '../actions/settings';
-import { EFontFamily, ETheme, ILang, ISettings } from '../types';
+import { EFontFamily, ELang, ETheme, ISettings } from '../types';
 
 const initialState: ISettings = initializeSettings();
 
@@ -25,7 +25,8 @@ function initializeSettings(): ISettings {
     font_family: settings.font_family || EFontFamily.roboto,
     theme_type: settings.theme_type || ETheme.light,
     news_per_page: settings.news_per_page || 10,
-    news_lang: settings.news_lang || ILang.ru,
+    news_lang: settings.news_lang || ELang.ru,
+    sources: settings.sources || ['google-news-ru', 'lenta', 'rbc', 'rt'],
   };
 }
 

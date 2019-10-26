@@ -1,4 +1,4 @@
-import { EFontFamily, ETheme, ILang } from '../../store/types';
+import { EFontFamily, ELang, ETheme } from '../../store/types';
 
 export const fontSizes = [14, 16, 18, 20, 22, 24, 26];
 
@@ -7,7 +7,7 @@ export const themeTypes = [{ name: 'Светлая', value: ETheme.light }, { na
 export const fontFamilyTypes = [EFontFamily.roboto, EFontFamily.open_sans];
 
 export const langs = [
-  { name: 'Русский', value: ILang.ru },
-  { name: 'English', value: ILang.en },
-  { name: '中国', value: ILang.zh },
+  { name: 'Русский', value: ELang.ru },
+  { name: 'English', value: ELang.en },
+  { name: '中国', value: ELang.zh },
 ];

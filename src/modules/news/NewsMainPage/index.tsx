@@ -9,12 +9,13 @@ import { IHeader, INews, IState } from '../../../store/types';
 import { fetchNews, INewsResponse } from '../dal';
 import styles from './styles';
 
-import { NewsCardSkeleton } from '../../../components/NewsCard/NewsCardSkeleton';
+import { NewsCardSkeleton } from '../../../components/NewsCard/NewsCardSkeleton/newsCardSkeleton';
 
 interface INewsMainPageProps {
   setHeader: (header: IHeader) => void;
   pageSize: number;
   classes: any;
+  news_lang: string;
 }
 
 interface INewsMainPageState {
@@ -29,7 +30,7 @@ class NewsMainPage extends Component<INewsMainPageProps, INewsMainPageState> {
     super(props);
     this.state = {
       offset: 0,
-      page: 0,
+      page: 1,
       loading: false,
       newsResponse: {
         articles: [],
@@ -51,14 +52,10 @@ class NewsMainPage extends Component<INewsMainPageProps, INewsMainPageState> {
       offset,
       loading,
     } = this.state;
-    const newsCards = articles.map((article: INews) => <NewsCard key={article.title} {...article} />);
+    const newsCards = articles.map((article: INews) => <NewsCard key={article.title} news={article} />);
+
     return loading ? (
-      <div>
-        <NewsCardSkeleton />
-        <NewsCardSkeleton />
-        <NewsCardSkeleton />
-        <NewsCardSkeleton />
-      </div>
+      <div>{this.generateLoadingBlocks(pageSize)}</div>
     ) : (
       <div className={classes.container}>
         {newsCards}
@@ -73,10 +70,10 @@ class NewsMainPage extends Component<INewsMainPageProps, INewsMainPageState> {
   }
 
   private getNews() {
-    const { pageSize } = this.props;
+    const { pageSize, news_lang } = this.props;
     const { page } = this.state;
     this.setState({ loading: true });
-    fetchNews(pageSize, page).then(response => {
+    fetchNews(pageSize, page, news_lang).then(response => {
       this.setState({
         loading: false,
         newsResponse: response.data,
@@ -93,10 +90,21 @@ class NewsMainPage extends Component<INewsMainPageProps, INewsMainPageState> {
       this.getNews,
     );
   }
+
+  private generateLoadingBlocks = (amount: number): React.ReactNode[] => {
+    const blocks = [];
+    for (let i = 0; i < amount; i++) {
+      blocks.push(<NewsCardSkeleton />);
+    }
+    return blocks;
+  };
 }
 
 const connectedToRedux = connect(
-  (store: IState) => ({ pageSize: store.settings.news_per_page }),
+  (store: IState) => ({
+    pageSize: store.settings.news_per_page,
+    news_lang: store.settings.news_lang,
+  }),
   { setHeader },
 )(NewsMainPage);
 
