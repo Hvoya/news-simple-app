@@ -1,93 +1,60 @@
-import Pagination from 'material-ui-flat-pagination';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { withStyles } from '@material-ui/core';
-import NewsCard from '../../../components/NewsCard';
 import { setHeader } from '../../../store/actions/header';
-import { IHeader, INews, IState } from '../../../store/types';
-import { fetchNews, INewsResponse } from '../dal';
+import { IHeader, IState } from '../../../store/types';
+import { INewsResponse } from '../dal';
 import styles from './styles';
 
+import { IFilters } from '../../../components/FiltersPanel';
 import { NewsCardSkeleton } from '../../../components/NewsCard/NewsCardSkeleton/newsCardSkeleton';
+import EndlessNewsList from '../components/EndlessNewsList';
+import PaginationNewsList from '../components/PaginationNewsList';
 
 interface INewsMainPageProps {
   setHeader: (header: IHeader) => void;
   pageSize: number;
   classes: any;
   news_lang: string;
+  sources: string[];
+  is_endless_news_list: boolean;
 }
 
 interface INewsMainPageState {
   newsResponse: INewsResponse;
   offset: number;
   page: number;
-  loading: boolean;
+  filters: IFilters;
 }
 
 class NewsMainPage extends Component<INewsMainPageProps, INewsMainPageState> {
-  constructor(props: INewsMainPageProps) {
-    super(props);
-    this.state = {
-      offset: 0,
-      page: 1,
-      loading: false,
-      newsResponse: {
-        articles: [],
-        totalResults: 0,
-      },
-    };
-  }
-
   public componentDidMount() {
     const { setHeader: changeHeader } = this.props;
     changeHeader({ title: 'Новости' });
-    this.getNews();
   }
 
   public render() {
-    const { pageSize, classes } = this.props;
-    const {
-      newsResponse: { articles, totalResults },
-      offset,
-      loading,
-    } = this.state;
-    const newsCards = articles.map((article: INews) => <NewsCard key={article.title} news={article} />);
+    const { pageSize, news_lang, sources, is_endless_news_list, classes } = this.props;
 
-    return loading ? (
-      <div>{this.generateLoadingBlocks(pageSize)}</div>
-    ) : (
+    return (
       <div className={classes.container}>
-        {newsCards}
-        <Pagination
-          onClick={this.handlePaginationChange.bind(this)}
-          offset={offset}
-          limit={pageSize}
-          total={totalResults}
-        />
+        {is_endless_news_list ? (
+          <EndlessNewsList
+            generateLoadingBlocks={() => this.generateLoadingBlocks(pageSize)}
+            pageSize={pageSize}
+            news_lang={news_lang}
+            sources={sources}
+          />
+        ) : (
+          <PaginationNewsList
+            generateLoadingBlocks={() => this.generateLoadingBlocks(pageSize)}
+            pageSize={pageSize}
+            news_lang={news_lang}
+            sources={sources}
+          />
+        )}
       </div>
-    );
-  }
-
-  private getNews() {
-    const { pageSize, news_lang } = this.props;
-    const { page } = this.state;
-    this.setState({ loading: true });
-    fetchNews(pageSize, page, news_lang).then(response => {
-      this.setState({
-        loading: false,
-        newsResponse: response.data,
-      });
-    });
-  }
-
-  private handlePaginationChange(_e: any, offset: number, page: number) {
-    this.setState(
-      {
-        offset,
-        page,
-      },
-      this.getNews,
     );
   }
 
@@ -101,9 +68,11 @@ class NewsMainPage extends Component<INewsMainPageProps, INewsMainPageState> {
 }
 
 const connectedToRedux = connect(
-  (store: IState) => ({
-    pageSize: store.settings.news_per_page,
-    news_lang: store.settings.news_lang,
+  ({ settings: { news_per_page, news_lang, sources, is_endless_news_list } }: IState) => ({
+    pageSize: news_per_page,
+    news_lang,
+    sources,
+    is_endless_news_list,
   }),
   { setHeader },
 )(NewsMainPage);

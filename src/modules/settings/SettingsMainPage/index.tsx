@@ -1,4 +1,13 @@
-import { FormControl, InputLabel, makeStyles, MenuItem, Select, TextField, Typography } from '@material-ui/core';
+import {
+  Checkbox,
+  FormControl,
+  InputLabel,
+  makeStyles,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -23,7 +32,7 @@ const SettingsMainPage: React.FC = () => {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
 
-  const { font_size, theme_type, font_family, news_per_page, news_lang, sources } = useSelector(
+  const { font_size, theme_type, font_family, news_per_page, news_lang, sources, is_endless_news_list } = useSelector(
     (store: IState) => store.settings,
   );
 
@@ -64,12 +73,16 @@ const SettingsMainPage: React.FC = () => {
 
   return (
     <div>
-      <Typography className={classes.bottomSpacing} gutterBottom variant="h2" component="div">
+      <Typography className={classes.heading} gutterBottom variant="h2" component="div">
         Здесь вы можете изменить внешний вид приложения.
       </Typography>
       <div className={classes.panelsContainer}>
-        <ExpPanel className={classes.bottomSpacing} header={<Typography>Шрифт</Typography>}>
-          <FormControl className={classes.formControl}>
+        <ExpPanel
+          detailsClass={classes.fontSettings}
+          className={classes.bottomSpacing}
+          header={<Typography>Шрифт</Typography>}
+        >
+          <FormControl className={`${classes.formControl} ${classes.fontSettingsFormControl}`}>
             <InputLabel>Размер шрифта</InputLabel>
             <Select value={font_size} onChange={e => handleChangeSettings('font_size', e.target.value)}>
               {fontSizeOptions}
@@ -90,8 +103,8 @@ const SettingsMainPage: React.FC = () => {
             </Select>
           </FormControl>
         </ExpPanel>
-        <ExpPanel className={classes.bottomSpacing} header={<Typography>Контент</Typography>}>
-          <FormControl className={classes.newsPerPage}>
+        <ExpPanel detailsClass={classes.contentSettings} header={<Typography>Контент</Typography>}>
+          <FormControl className={`${classes.newsPerPage} ${classes.contentSettingsFormControl}`}>
             <TextField
               value={news_per_page}
               inputProps={{ min: '5', max: '20', step: '1' }}
@@ -100,17 +113,29 @@ const SettingsMainPage: React.FC = () => {
               onChange={e => handleChangeNewsPerPage(parseInt(e.target.value, 10))}
             />
           </FormControl>
-          <FormControl className={classes.formControl}>
+          <FormControl className={`${classes.formControl} ${classes.contentSettingsFormControl}`}>
             <InputLabel>Язык новостей</InputLabel>
             <Select value={news_lang} onChange={e => handleChangeSettings('news_lang', e.target.value)}>
               {newsLangOptions}
             </Select>
           </FormControl>
           <SourcesSelect
+            className={`${classes.formControl} ${classes.contentSettingsFormControl}`}
             onChange={(value: string[]) => handleChangeSettings('sources', value)}
             values={sources}
             lang={news_lang}
           />
+          <div className={`${classes.formControl} ${classes.contentSettingsFormControl}`}>
+            <span>Включить бесконечную подгрузку новостей:</span>
+            <Checkbox
+              checked={is_endless_news_list}
+              onChange={e => handleChangeSettings('is_endless_news_list', e.target.checked)}
+              value="is_endless_news_list"
+              inputProps={{
+                'aria-label': 'primary checkbox',
+              }}
+            />
+          </div>
         </ExpPanel>
       </div>
     </div>

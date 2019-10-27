@@ -6,13 +6,14 @@ interface IExpPanelProps {
   children: React.ReactNode;
   header: React.ReactNode;
   className?: string;
+  detailsClass?: string;
 }
 
-const ExpPanel: React.FC<IExpPanelProps> = ({ children, header, className }) => {
+const ExpPanel: React.FC<IExpPanelProps> = ({ children, header, className, detailsClass }) => {
   return (
     <ExpansionPanel className={className}>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>{header}</ExpansionPanelSummary>
-      <ExpansionPanelDetails>{children}</ExpansionPanelDetails>
+      <ExpansionPanelDetails className={detailsClass}>{children}</ExpansionPanelDetails>
     </ExpansionPanel>
   );
 };

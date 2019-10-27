@@ -27,6 +27,7 @@ function initializeSettings(): ISettings {
     news_per_page: settings.news_per_page || 10,
     news_lang: settings.news_lang || ELang.ru,
     sources: settings.sources || ['google-news-ru', 'lenta', 'rbc', 'rt'],
+    is_endless_news_list: Boolean(settings.is_endless_news_list),
   };
 }
 

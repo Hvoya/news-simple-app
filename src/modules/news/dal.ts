@@ -1,34 +1,29 @@
 import axios from 'axios';
+import { IFilters } from '../../components/FiltersPanel';
 import { INews } from '../../store/types';
 
 export interface INewsResponse {
   articles: INews[];
-  totalResults: number;
+  totalResults?: number;
 }
 
-enum ESortBy {
-  popularity = 'popularity',
-  publishedAt = 'publishedAt',
+interface INewsRequestParams extends IFilters {
+  pageSize: number;
+  page: number;
+  news_lang: string;
+  sources: string[];
 }
 
-export const fetchNews = (
-  pageSize: number,
-  page: number,
-  lang: string,
-  from?: Date,
-  to?: Date,
-  sortBy?: ESortBy,
-  q?: string,
-) =>
-  axios.get<INewsResponse>('', {
+export const fetchNews = ({ pageSize, page, news_lang, from, to, sortBy, q, sources }: INewsRequestParams) =>
+  axios.get<INewsResponse>('/everything', {
     params: {
       page,
       pageSize,
-      from: new Date(),
+      from,
       to,
-      sortBy: 'publishedAt',
+      sortBy,
       q,
-      language: lang,
-      domain: 'ru',
+      language: news_lang,
+      sources: sources.join(','),
     },
   });

@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardMedia, makeStyles } from '@material-ui/core';
+import { Card, CardActionArea, CardMedia, Divider, makeStyles } from '@material-ui/core';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import React from 'react';
@@ -21,6 +21,7 @@ const NewsCard: React.FC<INewsCardProps> = ({ news: { urlToImage, title, publish
         <div className={classes.content}>
           <div className={classes.title}>{title}</div>
           <div className={classes.date}>{format(new Date(publishedAt), 'dd MMMM yyyy', { locale: ru })}</div>
+          <Divider />
           <p className={classes.description}>{description}</p>
         </div>
       </CardActionArea>

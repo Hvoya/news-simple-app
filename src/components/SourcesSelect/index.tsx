@@ -1,4 +1,3 @@
-import { makeStyles } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Input from '@material-ui/core/Input';
@@ -8,15 +7,15 @@ import Select from '@material-ui/core/Select';
 import React, { useEffect, useState } from 'react';
 import { ELang, ISource } from '../../store/types';
 import { fetchSources } from './dal';
-import styles from './styles';
 
 interface ISourcesSelectProps {
   lang: ELang;
   values: string[];
   onChange: (values: string[]) => void;
+  className?: string;
 }
 
-const SourcesSelect: React.FC<ISourcesSelectProps> = ({ lang, values, onChange }) => {
+const SourcesSelect: React.FC<ISourcesSelectProps> = ({ lang, values, onChange, className }) => {
   const [sources, setSources] = useState<ISource[]>([]);
   const [isError, setIsError] = useState<boolean>(false);
 
@@ -24,7 +23,7 @@ const SourcesSelect: React.FC<ISourcesSelectProps> = ({ lang, values, onChange }
     fetchSources(lang).then(res => {
       const { sources: fetchedSources } = res.data;
       setSources(fetchedSources);
-      // При смене языка поумолчанию выбираем первые 3 источника
+      // При смене языка по умолчанию выбираем первые 3 источника
       onChange(fetchedSources.slice(0, 3).map(source => source.id));
     });
   }, [lang]);
@@ -34,9 +33,6 @@ const SourcesSelect: React.FC<ISourcesSelectProps> = ({ lang, values, onChange }
       {source.name}
     </MenuItem>
   ));
-
-  const useStyles = makeStyles(styles);
-  const classes = useStyles();
 
   const handleChange = (event: any) => {
     const { value } = event.target;
@@ -49,15 +45,9 @@ const SourcesSelect: React.FC<ISourcesSelectProps> = ({ lang, values, onChange }
   };
 
   return (
-    <FormControl error={isError} className={classes.container}>
+    <FormControl error={isError} className={className}>
       <InputLabel htmlFor="select-multiple">Источники</InputLabel>
-      <Select
-        multiple
-        value={values}
-        onChange={handleChange}
-        input={<Input id="select-multiple" />}
-        // MenuProps={MenuProps}
-      >
+      <Select multiple value={values} onChange={handleChange} input={<Input id="select-multiple" />}>
         {items}
       </Select>
       {isError && <FormHelperText>Минимум 1 источник</FormHelperText>}

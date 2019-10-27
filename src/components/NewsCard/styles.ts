@@ -1,6 +1,6 @@
-import { createStyles } from '@material-ui/core/styles';
+import { createStyles, Theme } from '@material-ui/core/styles';
 
-function styles() {
+function styles(theme: Theme) {
   return createStyles({
     card: {
       marginBottom: 20,
@@ -9,11 +9,18 @@ function styles() {
       width: '100%',
       display: 'flex',
       alignItems: 'flex-start',
+      [theme.breakpoints.down('xs')]: {
+        flexDirection: 'column',
+      },
     },
     media: {
       width: '370px',
       height: '195px',
       flexShrink: 0,
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+        height: 'auto',
+      },
     },
     content: {
       padding: '.8em 1em',
