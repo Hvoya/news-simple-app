@@ -6,7 +6,7 @@ function configureAxios() {
 }
 
 function requestInterseptor(config: any) {
-  config.url = config.url + '?apiKey=2c94abfa63bf4c82a972095650b5f0ab';
+  config.url = config.url + '?apiKey=382ced45ced74984830768d974f7d31e';
   return config;
 }
 export default configureAxios;
