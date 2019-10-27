@@ -16,7 +16,7 @@ export const NewsCardSkeleton: React.FC = () => {
         <Skeleton className={classes.headingSecondSkeleton} />
         <Skeleton className={classes.contentSkeleton} />
         <Skeleton className={classes.contentSkeleton} />
-        <Skeleton className={classes.contentSkeleton} />
+        <Skeleton className={classes.lastContentSkeleton} />
       </div>
     </Card>
   );

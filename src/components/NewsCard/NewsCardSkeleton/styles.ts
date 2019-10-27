@@ -33,6 +33,10 @@ function styles(theme: Theme) {
     contentSkeleton: {
       width: '100%',
     },
+    lastContentSkeleton: {
+      width: '100%',
+      marginBottom: 0,
+    },
   });
 }
 
