@@ -2,6 +2,7 @@ import { makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Map, Placemark, YMaps } from 'react-yandex-maps';
+import { Skeleton } from '@material-ui/lab';
 
 import ContentWrapper from '../../../components/ContentWrapper';
 import { setHeader } from '../../../store/actions/header';
@@ -31,11 +32,16 @@ const AboutMainPage: React.FC = () => {
       <Typography className={classes.heading} variant="h2" component="div">
         Мы на картах:
       </Typography>
-      <YMaps>
-        <Map width={'100%'} height={500} defaultState={mapData}>
-          <Placemark geometry={coordinates} />
-        </Map>
-      </YMaps>
+      <div className={classes.mapContainer}>
+        <Skeleton className={classes.mapSkeleton} />
+        <div className={classes.mapContent}>
+          <YMaps>
+            <Map width={'100%'} height={500} defaultState={mapData}>
+              <Placemark geometry={coordinates} />
+            </Map>
+          </YMaps>
+        </div>
+      </div>
     </ContentWrapper>
   );
 };

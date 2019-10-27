@@ -5,6 +5,20 @@ function styles(theme: Theme) {
     heading: {
       marginBottom: theme.spacing(2),
     },
+    mapContainer: {
+      position: 'relative',
+    },
+    mapSkeleton: {
+      width: '100%',
+      height: 500,
+    },
+    mapContent: {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      width: '100%',
+      height: 500,
+    },
   });
 }
 
