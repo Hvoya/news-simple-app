@@ -1,8 +1,8 @@
+import { makeStyles } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import React from 'react';
-
-import { makeStyles } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+
 import Drawer from './components/Drawer';
 import TopBar from './components/TopBar';
 import layout from './layout.styles';
@@ -13,6 +13,7 @@ const App: React.FC = () => {
   // Выносим стили в отдельные файл. Нучего им тут делать.
   const useStyles = makeStyles(layout);
   const classes = useStyles();
+
   const header = useSelector((store: IState) => store.header);
 
   return (

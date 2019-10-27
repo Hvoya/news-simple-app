@@ -11,7 +11,10 @@ export const styles = (theme: Theme) =>
     formControl: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      minWidth: 200,
+      width: 200,
+    },
+    endlessNewsControl: {
+      maxWidth: 400,
     },
     newsPerPage: {
       minWidth: 270,

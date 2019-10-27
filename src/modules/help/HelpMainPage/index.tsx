@@ -1,7 +1,8 @@
+import { makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { makeStyles, Typography } from '@material-ui/core';
+import ContentWrapper from '../../../components/ContentWrapper';
 import { setHeader } from '../../../store/actions/header';
 import styles from './styles';
 
@@ -19,7 +20,7 @@ const HelpMainPage: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <div>
+    <ContentWrapper>
       <Typography className={classes.heading} gutterBottom variant="h1">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       </Typography>
@@ -47,7 +48,7 @@ const HelpMainPage: React.FC = () => {
         expedita explicabo laboriosam, mollitia nihil qui. Cum dolorum harum iste molestias nostrum perferendis
         recusandae voluptas, voluptates. Ab adipisci deleniti eius qui quidem.
       </p>
-    </div>
+    </ContentWrapper>
   );
 };
 

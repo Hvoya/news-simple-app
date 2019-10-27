@@ -4,7 +4,8 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
 import { ELang, ISource } from '../../store/types';
 import { fetchSources } from './dal';
 
@@ -18,11 +19,21 @@ interface ISourcesSelectProps {
 const SourcesSelect: React.FC<ISourcesSelectProps> = ({ lang, values, onChange, className }) => {
   const [sources, setSources] = useState<ISource[]>([]);
   const [isError, setIsError] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  // Запоминаем первый рендер и при получении источников не ставим дефолтные
+  const isFirstRun = useRef<boolean>(true);
 
   useEffect(() => {
+    setLoading(true);
     fetchSources(lang).then(res => {
+      setLoading(false);
       const { sources: fetchedSources } = res.data;
       setSources(fetchedSources);
+      if (isFirstRun.current) {
+        isFirstRun.current = false;
+        return;
+      }
       // При смене языка по умолчанию выбираем первые 3 источника
       onChange(fetchedSources.slice(0, 3).map(source => source.id));
     });
@@ -47,7 +58,7 @@ const SourcesSelect: React.FC<ISourcesSelectProps> = ({ lang, values, onChange, 
   return (
     <FormControl error={isError} className={className}>
       <InputLabel htmlFor="select-multiple">Источники</InputLabel>
-      <Select multiple value={values} onChange={handleChange} input={<Input id="select-multiple" />}>
+      <Select disabled={loading} multiple value={values} onChange={handleChange} input={<Input id="select-multiple" />}>
         {items}
       </Select>
       {isError && <FormHelperText>Минимум 1 источник</FormHelperText>}

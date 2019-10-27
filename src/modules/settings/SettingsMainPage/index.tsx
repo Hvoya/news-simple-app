@@ -11,13 +11,25 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import ContentWrapper from '../../../components/ContentWrapper';
 import ExpPanel from '../../../components/ExpPanel';
 import SourcesSelect from '../../../components/SourcesSelect';
 import { setHeader } from '../../../store/actions/header';
 import { setSettings } from '../../../store/actions/settings';
-import { IState } from '../../../store/types';
+import { EFontFamily, ELang, ETheme, IState } from '../../../store/types';
 import { fontFamilyTypes, fontSizes, langs, themeTypes } from '../constants';
 import { styles } from './styles';
+
+type TSttingsFields =
+  | 'font_family'
+  | 'font_size'
+  | 'theme_type'
+  | 'news_per_page'
+  | 'news_lang'
+  | 'sources'
+  | 'is_endless_news_list';
+
+type TSettingsValues = number | string[] | EFontFamily | ETheme | ELang | boolean;
 
 const SettingsMainPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -57,7 +69,7 @@ const SettingsMainPage: React.FC = () => {
     </MenuItem>
   ));
 
-  function handleChangeSettings(field: string, value: any) {
+  function handleChangeSettings(field: TSttingsFields, value: TSettingsValues) {
     dispatch(setSettings({ [field]: value }));
   }
 
@@ -72,7 +84,7 @@ const SettingsMainPage: React.FC = () => {
   }
 
   return (
-    <div>
+    <ContentWrapper>
       <Typography className={classes.heading} gutterBottom variant="h2" component="div">
         Здесь вы можете изменить внешний вид приложения.
       </Typography>
@@ -84,13 +96,13 @@ const SettingsMainPage: React.FC = () => {
         >
           <FormControl className={`${classes.formControl} ${classes.fontSettingsFormControl}`}>
             <InputLabel>Размер шрифта</InputLabel>
-            <Select value={font_size} onChange={e => handleChangeSettings('font_size', e.target.value)}>
+            <Select value={font_size} onChange={(e: any) => handleChangeSettings('font_size', e.target.value)}>
               {fontSizeOptions}
             </Select>
           </FormControl>
           <FormControl className={classes.formControl}>
             <InputLabel>Тип шрифта</InputLabel>
-            <Select value={font_family} onChange={e => handleChangeSettings('font_family', e.target.value)}>
+            <Select value={font_family} onChange={(e: any) => handleChangeSettings('font_family', e.target.value)}>
               {fontFamilyOptions}
             </Select>
           </FormControl>
@@ -98,7 +110,7 @@ const SettingsMainPage: React.FC = () => {
         <ExpPanel className={classes.bottomSpacing} header={<Typography>Стили</Typography>}>
           <FormControl className={classes.formControl}>
             <InputLabel>Тема приложения</InputLabel>
-            <Select value={theme_type} onChange={e => handleChangeSettings('theme_type', e.target.value)}>
+            <Select value={theme_type} onChange={(e: any) => handleChangeSettings('theme_type', e.target.value)}>
               {themeOptions}
             </Select>
           </FormControl>
@@ -110,12 +122,12 @@ const SettingsMainPage: React.FC = () => {
               inputProps={{ min: '5', max: '20', step: '1' }}
               label="Количество новостей на странице"
               type="number"
-              onChange={e => handleChangeNewsPerPage(parseInt(e.target.value, 10))}
+              onChange={(e: any) => handleChangeNewsPerPage(parseInt(e.target.value, 10))}
             />
           </FormControl>
           <FormControl className={`${classes.formControl} ${classes.contentSettingsFormControl}`}>
             <InputLabel>Язык новостей</InputLabel>
-            <Select value={news_lang} onChange={e => handleChangeSettings('news_lang', e.target.value)}>
+            <Select value={news_lang} onChange={(e: any) => handleChangeSettings('news_lang', e.target.value)}>
               {newsLangOptions}
             </Select>
           </FormControl>
@@ -125,11 +137,11 @@ const SettingsMainPage: React.FC = () => {
             values={sources}
             lang={news_lang}
           />
-          <div className={`${classes.formControl} ${classes.contentSettingsFormControl}`}>
+          <div className={`${classes.endlessNewsControl} ${classes.contentSettingsFormControl}`}>
             <span>Включить бесконечную подгрузку новостей:</span>
             <Checkbox
               checked={is_endless_news_list}
-              onChange={e => handleChangeSettings('is_endless_news_list', e.target.checked)}
+              onChange={(e: any) => handleChangeSettings('is_endless_news_list', e.target.checked)}
               value="is_endless_news_list"
               inputProps={{
                 'aria-label': 'primary checkbox',
@@ -138,7 +150,7 @@ const SettingsMainPage: React.FC = () => {
           </div>
         </ExpPanel>
       </div>
-    </div>
+    </ContentWrapper>
   );
 };
 

@@ -9,6 +9,7 @@ function styles(theme: Theme) {
       width: '100%',
       display: 'flex',
       alignItems: 'flex-start',
+      fontSize: '1em',
       [theme.breakpoints.down('xs')]: {
         flexDirection: 'column',
       },
@@ -35,7 +36,7 @@ function styles(theme: Theme) {
       marginBottom: '1.2em',
     },
     description: {
-      fontSize: '1.1em',
+      fontSize: '1em',
     },
   });
 }

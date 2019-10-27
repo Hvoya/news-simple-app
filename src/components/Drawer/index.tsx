@@ -9,6 +9,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import SettingsIcon from '@material-ui/icons/Settings';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { toggleMobileDrawer } from '../../store/actions/mobile_drawer';
 import { IState } from '../../store/types';
 import NavLink from '../NavLink';
@@ -19,6 +20,7 @@ interface IDrawerProps {
 
 const Drawer: React.FC<IDrawerProps> = props => {
   const { classes } = props;
+
   const dispatch = useDispatch();
   const isMobileDrawerOpen = useSelector((state: IState) => state.isMobileDrawerOpen);
   const handleMobileDrawerCancel = () => dispatch(toggleMobileDrawer());

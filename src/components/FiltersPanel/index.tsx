@@ -1,8 +1,10 @@
 import DateFnsUtils from '@date-io/date-fns';
-import { FormControl, InputLabel, makeStyles, MenuItem, Paper, Select, TextField } from '@material-ui/core';
+import { FormControl, InputLabel, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { KeyboardDatePicker, MaterialUiPickersDate, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import React, { useState } from 'react';
+
+import ExpPanel from '../ExpPanel';
 import { sorts } from './constants';
 import { styles } from './styles';
 
@@ -47,12 +49,12 @@ const FiltersPanel: React.FC<IFiltersPanelProps> = ({ onChange }) => {
     </MenuItem>
   ));
   return (
-    <Paper className={classes.container}>
+    <ExpPanel detailsClass={classes.content} className={classes.panel} header="Фильтры">
       <div>
         <TextField
           onChange={(e: any) => handleFilterChange('q', e.target.value)}
           value={filters.q}
-          className={classes.item}
+          className={`${classes.item} ${classes.searchItem}`}
           label="Поиск"
         />
         <FormControl className={classes.item}>
@@ -95,7 +97,7 @@ const FiltersPanel: React.FC<IFiltersPanelProps> = ({ onChange }) => {
           <Button onClick={() => onChange(filters)}>Применить</Button>
         </MuiPickersUtilsProvider>
       </div>
-    </Paper>
+    </ExpPanel>
   );
 };
 

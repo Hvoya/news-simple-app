@@ -1,5 +1,6 @@
 import Pagination from 'material-ui-flat-pagination';
 import React, { Component } from 'react';
+
 import FiltersPanel, { ESortBy, IFilters } from '../../../../components/FiltersPanel';
 import NewsCard from '../../../../components/NewsCard';
 import { INews } from '../../../../store/types';
@@ -41,11 +42,11 @@ class PaginationNewsList extends Component<IPaginationNewsListProps, IPagination
     };
   }
 
-  componentDidMount(): void {
+  public componentDidMount(): void {
     this.getNews();
   }
 
-  render() {
+  public render() {
     const { pageSize, generateLoadingBlocks } = this.props;
     const {
       offset,
@@ -69,7 +70,7 @@ class PaginationNewsList extends Component<IPaginationNewsListProps, IPagination
   }
 
   private handleFiltersChange = (filters: IFilters) => {
-    this.setState({ filters }, this.getNews);
+    this.setState({ filters, offset: 0, page: 1, newsResponse: { totalResults: 0, articles: [] } }, this.getNews);
   };
 
   private handlePaginationChange(_e: any, offset: number, page: number) {

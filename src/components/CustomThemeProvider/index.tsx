@@ -1,6 +1,7 @@
 import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 import React from 'react';
 import { useSelector } from 'react-redux';
+
 import { IState } from '../../store/types';
 
 interface ICustomThemeProviderProps {
@@ -19,11 +20,11 @@ const CustomThemeProvider: React.FC<ICustomThemeProviderProps> = ({ children }) 
       fontSize: font_size,
       // Меняем заголовки (Стандартные слишком большие)
       h1: {
-        fontSize: '2em',
+        fontSize: '1.6em',
         fontWeight: 400,
       },
       h2: {
-        fontSize: '1.8em',
+        fontSize: '1.2em',
         fontWeight: 300,
       },
     },

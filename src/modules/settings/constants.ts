@@ -1,6 +1,6 @@
 import { EFontFamily, ELang, ETheme } from '../../store/types';
 
-export const fontSizes = [14, 16, 18, 20, 22, 24, 26];
+export const fontSizes = [12, 14, 16, 18, 20];
 
 export const themeTypes = [{ name: 'Светлая', value: ETheme.light }, { name: 'Тёмная', value: ETheme.dark }];
 

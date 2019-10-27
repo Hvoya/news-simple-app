@@ -9,7 +9,7 @@ function styles(theme: Theme) {
       marginBottom: theme.spacing(5),
     },
     paragraph: {
-      fontSize: '1.4em',
+      fontSize: '1em',
       lineHeight: '1.5',
       maxWidth: '40em',
       paddingLeft: theme.spacing(2),

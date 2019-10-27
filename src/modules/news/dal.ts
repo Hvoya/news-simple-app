@@ -14,8 +14,8 @@ interface INewsRequestParams extends IFilters {
   sources: string[];
 }
 
-export const fetchNews = ({ pageSize, page, news_lang, from, to, sortBy, q, sources }: INewsRequestParams) =>
-  axios.get<INewsResponse>('/everything', {
+export const fetchNews = ({ pageSize, page, news_lang, from, to, sortBy, q, sources }: INewsRequestParams) => {
+  return axios.get<INewsResponse>('/everything', {
     params: {
       page,
       pageSize,
@@ -27,3 +27,4 @@ export const fetchNews = ({ pageSize, page, news_lang, from, to, sortBy, q, sour
       sources: sources.join(','),
     },
   });
+};

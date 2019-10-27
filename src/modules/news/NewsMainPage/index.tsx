@@ -1,16 +1,16 @@
+import { withStyles } from '@material-ui/core';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { withStyles } from '@material-ui/core';
+import ContentWrapper from '../../../components/ContentWrapper';
+import { IFilters } from '../../../components/FiltersPanel';
+import { NewsCardSkeleton } from '../../../components/NewsCard/NewsCardSkeleton';
 import { setHeader } from '../../../store/actions/header';
 import { IHeader, IState } from '../../../store/types';
-import { INewsResponse } from '../dal';
-import styles from './styles';
-
-import { IFilters } from '../../../components/FiltersPanel';
-import { NewsCardSkeleton } from '../../../components/NewsCard/NewsCardSkeleton/newsCardSkeleton';
 import EndlessNewsList from '../components/EndlessNewsList';
 import PaginationNewsList from '../components/PaginationNewsList';
+import { INewsResponse } from '../dal';
+import styles from './styles';
 
 interface INewsMainPageProps {
   setHeader: (header: IHeader) => void;
@@ -29,7 +29,7 @@ interface INewsMainPageState {
 }
 
 class NewsMainPage extends Component<INewsMainPageProps, INewsMainPageState> {
-  public componentDidMount() {
+  public componentDidMount(): void {
     const { setHeader: changeHeader } = this.props;
     changeHeader({ title: 'Новости' });
   }
@@ -38,7 +38,7 @@ class NewsMainPage extends Component<INewsMainPageProps, INewsMainPageState> {
     const { pageSize, news_lang, sources, is_endless_news_list, classes } = this.props;
 
     return (
-      <div className={classes.container}>
+      <ContentWrapper className={classes.container}>
         {is_endless_news_list ? (
           <EndlessNewsList
             generateLoadingBlocks={() => this.generateLoadingBlocks(pageSize)}
@@ -54,14 +54,14 @@ class NewsMainPage extends Component<INewsMainPageProps, INewsMainPageState> {
             sources={sources}
           />
         )}
-      </div>
+      </ContentWrapper>
     );
   }
 
   private generateLoadingBlocks = (amount: number): React.ReactNode[] => {
     const blocks = [];
     for (let i = 0; i < amount; i++) {
-      blocks.push(<NewsCardSkeleton />);
+      blocks.push(<NewsCardSkeleton key={i} />);
     }
     return blocks;
   };

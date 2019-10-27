@@ -4,7 +4,9 @@ import reducers from './reducers';
 
 const store = createStore(
   reducers,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
+  process.env.NODE_ENV === 'development' &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
 );
 
 store.subscribe(() => {

@@ -6,7 +6,6 @@ function styles() {
       maxWidth: '66em',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
     },
   });
 }
